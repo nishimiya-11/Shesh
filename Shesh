@@ -1,0 +1,31 @@
+import time
+from concurrent.futures import ThreadPoolExecutor
+
+
+
+def process_order(order_id):
+    print(f"Processing Order {order_id}...")
+    print(f"Order {order_id}: Verifying order")
+    time.sleep(1)
+    print(f"Order {order_id}: Processing payment")
+    time.sleep(1)
+    print(f"Order {order_id}: Packaging item")
+    time.sleep(1)
+    print(f"Order {order_id}: Ready for shopping")
+    time.sleep(1)
+    
+    print(f"Order {order_id} completed.")
+    
+def main():
+    orders = list(range(1,11))
+    
+    print("Starting parallel order processing...\n")
+    
+    with ThreadPoolExecutor(max_workers=5) as executor:
+        list(executor.map(process_order, orders))
+        
+    print("\nAll orders have been completed.")
+    
+    
+if __name__ == "__main__":
+    main()
